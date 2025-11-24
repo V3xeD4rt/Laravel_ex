@@ -1,0 +1,9 @@
+{
+    "name": "osipov_gs/php",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {}
+}
