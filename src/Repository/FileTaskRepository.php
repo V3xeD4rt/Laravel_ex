@@ -13,55 +13,72 @@ class FileTaskRepository implements TaskRepositoryInterface
     }
     
     public function findAll(): array
-    {
-        if (!file_exists($this->filepath)) {
-            return [];
-        }
-        $content = file_get_contents($this->filepath);
-        if ($content === false || trim($content) === '') {
-            return [];
-        }
-        $data = json_decode($content, true);
-        if (!is_array($data)) {
-            return [];
-        }
-        $tasks = [];
-        foreach ($data as $item) {
-            $tasks[] = new Task(
-                $item['title'] ?? '',
-                $item['completed'] ?? false,
-                $item['id'] ?? null
-            );
+{
+    if (!file_exists($this->filepath)) {
+        return [];
+    }
+    $content = file_get_contents($this->filepath);
+    if ($content === false || trim($content) === '') {
+        return [];
+    }
+    $data = json_decode($content, true);
+    if (!is_array($data)) {
+        return [];
+    }
+    $tasks = [];
+    foreach ($data as $item) {
+        // Skip invalid or empty task items
+        if (!is_array($item) || empty($item['title']) || !isset($item['id'])) {
+            continue;
         }
         
-        usort($tasks, function($a, $b) {
-            return $b->getId() - $a->getId();
-        });
-        
-        return $tasks;
+        $tasks[] = new Task(
+            $item['title'] ?? '',
+            $item['completed'] ?? false,
+            $item['id'] ?? 0  // Use 0 as default instead of null
+        );
     }
     
+    usort($tasks, function($a, $b) {
+        return $b->getId() - $a->getId();
+    });
+    
+    return $tasks;
+}
+    
     public function add($task): void
-    { 
-        $tasks = $this->findAll();
-        
-        $maxId = 0;
-        foreach ($tasks as $existingTask) {
-            if ($existingTask->getId() > $maxId) {
-                $maxId = $existingTask->getId();
-            }
+{ 
+    $tasks = $this->findAll();
+    
+    $maxId = 0;
+    foreach ($tasks as $existingTask) {
+        if ($existingTask->getId() > $maxId) {
+            $maxId = $existingTask->getId();
         }
-        
-        $newTask = [ 
-            'id' => $maxId + 1,
-            'title' => $task->getTitle(),
-            'completed' => $task->isCompleted()
-        ];
-        
-        array_unshift($tasks, $newTask);
-        
-        file_put_contents($this->filepath, json_encode($tasks, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
+    
+    // Create a new Task object with the new ID
+    $newTask = new Task(
+        $task->getTitle(),
+        $task->isCompleted(),
+        $maxId + 1
+    );
+    
+    // Add the Task object to the array
+    array_unshift($tasks, $newTask);
+    
+    // Convert all Task objects to arrays for JSON storage
+    $data = [];
+    foreach ($tasks as $taskObj) {
+        $data[] = [
+            'id' => $taskObj->getId(),
+            'title' => $taskObj->getTitle(),
+            'completed' => $taskObj->isCompleted()
+        ];
+    }
+    
+    file_put_contents($this->filepath, json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+}
     
     public function toggle(int $taskId): void
     {
