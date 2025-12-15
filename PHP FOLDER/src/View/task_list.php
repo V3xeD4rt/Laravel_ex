@@ -8,10 +8,10 @@
 
 <body>
     <div>
-        <a href="?route=task/switch-mode&mode=mysql"<?= ($_SESSION['repository_mode'] ?? 'mysql') === 'mysql' ? 'active' : '' ?>">
+        <a href="?route=task/switch-mode&mode=mysql"<?= ($_SESSION['repository_mode'] ?? 'mysql') === 'mysql' ? 'active' : '' ?>>
             MySQL режим
         </a>
-        <a href="?route=task/switch-mode&mode=file"<?= ($_SESSION['repository_mode'] ?? 'mysql') === 'file' ? 'active' : '' ?>">
+        <a href="?route=task/switch-mode&mode=file"<?= ($_SESSION['repository_mode'] ?? 'mysql') === 'file' ? 'active' : '' ?>>
             File режим
         </a>
     </div>
@@ -29,7 +29,7 @@
         <ul>
             <?php foreach ($tasks as $task): ?>
                 <li>
-                    <button <?= $task->isCompleted() ? 'completed' : '' ?>" 
+                    <button <?= $task->isCompleted() ? 'completed' : '' ?> 
                             onclick="location.href='?route=task/toggle&id=<?= $task->getId() ?>'">
                         <?= $task->isCompleted() ? "✓" : "X" ?>
                     </button>
