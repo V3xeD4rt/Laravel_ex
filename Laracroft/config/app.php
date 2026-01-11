@@ -69,6 +69,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Repository Mode
+    |--------------------------------------------------------------------------
+    |
+    | Default repository mode for the task application.
+    | Can be 'mysql', 'file', or 'memory'
+    |
+    */
+
+    'repository_mode' => env('REPOSITORY_MODE', 'mysql'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Locale Configuration
     |--------------------------------------------------------------------------
     |
@@ -122,5 +134,4 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
-
 ];
