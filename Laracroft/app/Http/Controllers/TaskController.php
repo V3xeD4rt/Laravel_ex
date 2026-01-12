@@ -53,7 +53,7 @@ class TaskController extends Controller
     public function switchMode(Request $request)
     {
         $mode = $request->input('mode', 'mysql');
-        if (in_array($mode, ['mysql', 'file', 'memory'])) {
+        if (in_array($mode, ['mysql', 'file'])) {
             session(['repository_mode' => $mode]);
         }
         

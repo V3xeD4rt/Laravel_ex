@@ -73,7 +73,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Default repository mode for the task application.
-    | Can be 'mysql', 'file', or 'memory'
+    | Can be 'mysql', 'file'
     |
     */
 

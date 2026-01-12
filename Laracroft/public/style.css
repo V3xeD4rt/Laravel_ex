@@ -1,0 +1,147 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f6fa;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: #0077cc;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+}
+
+.mode-btn,
+a[href*="switch-mode"] {
+    padding: 6px 12px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #eee;
+    color: #333;
+}
+
+.mode-btn.active,
+a.active {
+    background: #0077cc;
+    color: #fff;
+    border-color: #0077cc;
+}
+
+h1 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+form {
+    background: #fff;
+    padding: 15px;
+    border-radius: 6px;
+    max-width: 400px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+    background: #28a745;
+    color: #fff;
+}
+
+button[type="submit"]:hover {
+    background: #218838;
+}
+
+.error {
+    color: #c0392b;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+}
+
+li {
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.task-toggle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #ccc;
+    font-weight: bold;
+}
+
+.task-toggle.completed {
+    background: #28a745;
+    color: #fff;
+}
+
+li > div:nth-child(2) {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+li > div:last-child {
+    text-align: right;
+}
+
+li span {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+li button:last-child {
+    background: #dc3545;
+    color: #fff;
+}
+
+li button:last-child:hover {
+    background: #c82333;
+}
+
+.add-link {
+    display: inline-block;
+    margin-bottom: 15px;
+    font-weight: bold;
+}

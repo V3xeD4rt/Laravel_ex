@@ -15,7 +15,6 @@ class RepositoryServiceProvider extends ServiceProvider
                 
                 return match ($mode) {
                     'file' => new \App\Repositories\FileTaskRepository(),
-                    'memory' => new \App\Repositories\InMemoryTaskRepository(),
                     default => new \App\Repositories\MySqlTaskRepository(),
                 };
             }
